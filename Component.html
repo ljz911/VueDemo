@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>定义组件测试</title>
+
+    <link rel="stylesheet" href="css/element-ui.css">
+    <script src="js/vue.min.js"></script>
+    <script src="js/element-ui.js"></script>
+
+
+    <script src="js/template/tem-tabs.js"></script>   <!--引入定义组件的技术文件-->
+
+</head>
+<body>
+    <div id="app">
+        <tem-tabs :index="1" :list="parentList" ></tem-tabs>
+    </div>
+    <script>
+
+        var myVue = new Vue({
+            el: '#app',
+            data:{
+                parentList:[
+                    {label:'玄幻小说',content:'圣墟'},
+                    {label:'武侠小说',content:'雪中悍刀行'},
+                    {label:'都市小说',content:'天才相师'},
+                    {label:'鬼怪小说',content:'盗墓笔记'},
+                ],
+                activeName:'first'
+            },
+            methods:{
+                handleClick:function (tab,event) {
+                       console.log(tab);
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>

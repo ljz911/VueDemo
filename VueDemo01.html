@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试vue的$nextTick钩子函数</title>
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <ul id="demo">
+        <li v-for="item in list">{{item}} </li>
+    </ul>
+    <button @click="push">点击</button>
+</div>
+<script>
+    var myVue = new Vue({
+        el:'#demo',
+        data:{
+            list:[0,1,2,3,4,5,6,7,8,9,10]
+        },
+        methods:{
+            push:function(){
+                this.list.push(11);
+               /* this.nextTick(function(){
+                    alert('数据已经更新')
+                });*/
+                this.$nextTick(function(){
+                    alert('v-for渲染已经完成')
+                })
+            },
+            add:function(){
+                this.list = [1,2,3,4,5];
+               /* myVue.nextTick(function(){
+                    alert('数据已经更新')
+                });*/
+                this.$nextTick(function(){
+                    alert('v-for渲染已经完成')
+                })
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

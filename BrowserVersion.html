@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>获取浏览器版本号</title>
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <p>浏览器类型{{}}</p>
+    <p>浏览器版本{{}}</p>
+</div>
+<script>
+    var myVue = new Vue({
+        el:'#app',
+        data:{
+            browser:{
+
+            }
+        },
+        methods:{
+            getVersion:function(){
+                var agent = navigator.userAgent.toLowerCase() ;
+                var reg_ie = /msie [\d.]+;/gi ;
+                var reg_ff = /firefox\/[\d.]+/gi
+                var reg_chrome = /chrome\/[\d.]+/gi ;
+                var reg_saf = /safari\/[\d.]+/gi ;
+
+                var reg_version = /\d+/gi ;
+
+                //IE11以下
+                if(agent.indexOf("msie") > 0)
+                {
+                    const info = agent.match(reg_ie)[0];
+                    const version = info.match(reg_version)[0];
+                    return {type:"IE",version:version,isMatch:parseInt(version>=9),update:9}
+                }
+
+                //IE11版本中不包括MSIE字段
+                if(agent.indexOf("trident") > 0&&agent.indexOf("rv") > 0){
+                    return "IE " + agent.match(/rv:(\d+\.\d+)/) [1];
+                }
+
+                //firefox
+                if(agent.indexOf("firefox") > 0)
+                {
+                    return agent.match(reg_ff) ;
+                }
+
+                //Chrome
+                if(agent.indexOf("chrome") > 0)
+                {
+                    return agent.match(reg_chrome) ;
+                }
+
+                //Safari
+                if(agent.indexOf("safari") > 0 && agent.indexOf("chrome") < 0)
+                {
+                    return agent.match(reg_saf) ;
+                }
+
+            }
+        }
+    })
+</script>
+</body>
+</html>

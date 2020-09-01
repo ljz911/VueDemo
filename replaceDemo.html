@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>replaceDemo</title>
+    <script src="js/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+
+    <div id="text">
+    </div>
+    <textarea name="" id="texts" cols="30" rows="4"></textarea>
+</body>
+<script>
+
+    var str = "aaaaaaaa<br>bbbbbbbbb<br>ccccccccccccccccc<br>";
+    $("#text").html(" <h2> "+str+"</h2>");
+    //$("#texts").val(str);
+
+//查找第一个符合的字符串进行替换。
+    str = str.replace('<br>','\n');
+    $("#texts").val(str);
+
+    //全局查找将所有的匹配的字符串都进行替换  方法1。
+    var reg = new RegExp('<br>','g');
+    str = str.replace(reg,'\n');
+    $("#texts").val(str);
+
+    //全局查找将所有的匹配的字符串都进行替换  方法2。
+    str = str.replace(/<br>/g,'\n');
+    $("#texts").val(str);
+
+</script>
+
+</html>

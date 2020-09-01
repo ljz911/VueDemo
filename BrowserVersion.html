@@ -7,15 +7,20 @@
 </head>
 <body>
 <div id="app">
-    <p>浏览器类型{{}}</p>
-    <p>浏览器版本{{}}</p>
+    <p>浏览器类型:{{browser.type}}</p>
+    <p>浏览器版本:{{browser.version}}</p>
+    <p>是否支持Vue:{{browser.isMatch}}</p>
+    <p>最低需要的浏览器版本:{{browser.update}}</p>
 </div>
 <script>
     var myVue = new Vue({
         el:'#app',
         data:{
             browser:{
-
+                type:'未知浏览器',
+                version:0,
+                isMatch:true,
+                update:0,
             }
         },
         methods:{
@@ -31,35 +36,51 @@
                 //IE11以下
                 if(agent.indexOf("msie") > 0)
                 {
-                    const info = agent.match(reg_ie)[0];
-                    const version = info.match(reg_version)[0];
-                    return {type:"IE",version:version,isMatch:parseInt(version>=9),update:9}
+                    var info = agent.match(reg_ie)[0];
+                    var version = info.match(reg_version)[0];
+                    return {type:"IE",version:version,isMatch:parseInt(version)>=9,update:9}
                 }
 
                 //IE11版本中不包括MSIE字段
                 if(agent.indexOf("trident") > 0&&agent.indexOf("rv") > 0){
-                    return "IE " + agent.match(/rv:(\d+\.\d+)/) [1];
+                    //return "IE " + agent.match(/rv:(\d+\.\d+)/) [1];
+                    var version = agent.match(/rv:(\d+\.\d+)/)[1];
+                    return {type:"IE",version:version,isMatch:parseInt(version)>=9,update:9}
                 }
 
                 //firefox
                 if(agent.indexOf("firefox") > 0)
                 {
-                    return agent.match(reg_ff) ;
+                    //return agent.match(reg_ff) ;
+                    var info = agent.match(reg_ff)[0];
+                    var version = info.match(reg_version)[0];
+
+                    return {type:"firefox",version:version,isMatch:parseInt(version)>=21,update:21}
                 }
 
                 //Chrome
                 if(agent.indexOf("chrome") > 0)
                 {
-                    return agent.match(reg_chrome) ;
+                    //return agent.match(reg_chrome) ;
+                    //console.log(agent.match(reg_chrome));
+                    var info = agent.match(reg_chrome)[0];
+                    var version = info.match(reg_version)[0];
+                    return {type:"chrome",version:version,isMatch:parseInt(version)>=23,update:23};
                 }
 
                 //Safari
                 if(agent.indexOf("safari") > 0 && agent.indexOf("chrome") < 0)
                 {
-                    return agent.match(reg_saf) ;
+                    //return agent.match(reg_saf) ;
+                    var info = agent.match(reg_saf)[0];
+                    var version = info.match(reg_version)[0];
+                    return {type:"safari",version:version,isMatch:parseInt(version)>=6,update:6};
                 }
 
             }
+        },
+        mounted:function () {
+            this.browser = this.getVersion();
         }
     })
 </script>

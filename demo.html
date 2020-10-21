@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue基础Demo</title>
+
+    <script src="js/vue.min.js" ></script>
+
+    <style>
+        .item{
+            background-color: #aaa999;
+            display: inline-block;
+            width: 80px;
+            height: 25px;
+            text-align: center;
+            color: yellow;
+            margin: 0px;
+        }
+        .choose{
+            color: white;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" >
+        {{msg}}
+        <div @click="func1" >
+            <p>test</p>
+            <button @click.stop="func2" >btn1</button>
+            <a href="#123" @click.prevent="func3" >a1</a>
+        </div>
+
+        <div v-if="flg" >
+            flg是true
+        </div>
+        <div v-else >
+            flg不是true
+        </div>
+        <div v-if="val==1" >val=1</div>
+        <div v-else-if="val==2" >val=2</div>
+        <div v-else-if="val==3" >val=3</div>
+        <div v-else >val!=1 2 3</div>
+
+        <div>
+            <span @click="handleMenu(1)" :class="index==1?'item choose':'item'" >menu1</span>
+            <span @click="handleMenu(2)" :class="index==2?'item choose':'item'" >menu2</span>
+            <span @click="handleMenu(3)" :class="index==3?'item choose':'item'" >menu3</span>
+
+            <span @click="handleMenu(-1)" :style="formatClass(-1)" >menu-1</span>
+            <span @click="handleMenu(1)" :style="formatClass(1)" >menu1</span>
+            <span @click="handleMenu(5)" :style="formatClass(5)" >menu5</span>
+        </div>
+
+    </div>
+</body>
+<script>
+    var myVue = new Vue({
+        el:'#app',
+        data:{
+            msg:'hello world!',
+            flg:false,
+            val:0,
+            index:1,
+        },
+        methods:{
+            func1:function () {
+                console.log(111)
+            },
+            func2:function () {
+                console.log(222);
+            },
+            func3:function () {
+                console.log(333);
+            },
+            handleMenu:function (val) {
+                this.index = val;
+            },
+            formatClass:function (val) {
+                if (val<0){
+                    return "width:20px;"
+                }else if(val>=0&&val<=5){
+                    return "width:30px;";
+                }else if(val>5){
+                    return "width:50px;";
+                }
+            }
+        }
+    })
+</script>
+</html>

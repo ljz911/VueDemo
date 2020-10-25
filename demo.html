@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Vue基础Demo</title>
-
+    <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/vue.min.js" ></script>
 
     <style>
@@ -52,6 +52,11 @@
             <span @click="handleMenu(5)" :style="formatClass(5)" >menu5</span>
         </div>
 
+        <ul>
+            <li   v-for="(item,i) in list" :id="item.id" >  {{item.id}}: <span>{{item.name}}</span>   </li>
+        </ul>
+        <p v-for="(value,i) in obj" > {{i+":"+value}} </p>
+        <button @click="addItem">t添加item</button>
     </div>
 </body>
 <script>
@@ -62,6 +67,9 @@
             flg:false,
             val:0,
             index:1,
+            i:2,
+            list:[{id:'1001',name:'a'},{id:'1002',name:'b'},{id:'1003',name:'c'}],
+            obj:{name:'aaa',age:'20',sex:'male'},
         },
         methods:{
             func1:function () {
@@ -84,6 +92,15 @@
                 }else if(val>5){
                     return "width:50px;";
                 }
+            },
+
+            addItem:function () {
+                this.list.push({id:'1004',name:'d'});
+                console.log($('#1004').text());
+                this.$nextTick(function () {
+                    console.log("v-for  dom元素已经渲染完成");
+                    console.log($('#1004').text());
+                })
             }
         }
     })

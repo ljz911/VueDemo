@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>兼容分辨率布局</title>
+
+    <link rel="stylesheet" href="css/resize.css">
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../js/vue.min.js"></script>
+</head>
+
+<script>
+    function autoWH() {
+        var whdef = 100/1920;
+        var wH = window.innerHeight;
+        var wW = window.innerWidth;
+        var rem = wW*whdef;
+        $('html').css('font-size',rem+"px");
+        $('html').attr('bili',rem);
+        bili = wW*whdef;
+    }
+    /*var whdef = 100/1920;
+    var wH = window.innerHeight;
+    var wW = window.innerWidth;
+    var rem = wW*whdef;
+    $('html').css('font-size',rem+"px");
+    $('html').attr('bili',rem);
+    bili = wW*whdef;*/
+
+
+    $(window).on('resize', function() {
+        // 设置Iframe窗口大小
+        autoWH();
+    }).resize();
+    autoWH();
+
+
+
+</script>
+<body>
+    <div id="app" >
+        <div class="container_top" >
+            <div class="top_item" @click="choose(1)" >item1
+                <i v-if="index==1" class="icon_choose"></i>
+            </div>
+            <div class="top_item" @click="choose(2)" >item2
+                <i v-if="index==2" class="icon_choose"></i>
+            </div>
+            <div class="top_item" @click="choose(3)" >item3
+                <i v-if="index==3" class="icon_choose"></i>
+            </div>
+            <div class="top_item" @click="choose(4)" >item4
+                <i v-if="index==4" class="icon_choose"></i>
+            </div>
+        </div>
+        <div class="container_body" >
+            head
+        </div>
+    </div>
+
+
+</body>
+<script>
+    var myVue = new Vue({
+        el:'#app',
+        data:{
+            index:1,
+        },
+        methods:{
+            choose:function(val){
+                this.index = val;
+            }
+
+        }
+    })
+</script>
+
+</html>

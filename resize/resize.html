@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>兼容分辨率布局</title>
-
     <link rel="stylesheet" href="css/resize.css">
     <script src="../js/jquery-3.3.1.min.js"></script>
     <script src="../js/vue.min.js"></script>
@@ -11,23 +10,13 @@
 
 <script>
     function autoWH() {
-        var whdef = 100/1920;
+        var bili = 100/1920;
         var wH = window.innerHeight;
         var wW = window.innerWidth;
-        var rem = wW*whdef;
+        var rem = wW*bili;
         $('html').css('font-size',rem+"px");
         $('html').attr('bili',rem);
-        bili = wW*whdef;
     }
-    /*var whdef = 100/1920;
-    var wH = window.innerHeight;
-    var wW = window.innerWidth;
-    var rem = wW*whdef;
-    $('html').css('font-size',rem+"px");
-    $('html').attr('bili',rem);
-    bili = wW*whdef;*/
-
-
     $(window).on('resize', function() {
         // 设置Iframe窗口大小
         autoWH();
@@ -54,7 +43,7 @@
             </div>
         </div>
         <div class="container_body" >
-            head
+            body
         </div>
     </div>
 

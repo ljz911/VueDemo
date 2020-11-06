@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>监听页面窗口切换</title>
+    <script  src="../js/jquery-3.3.1.min.js" ></script>
+</head>
+<body>
+
+    <h3>本demo主要测试监听页面窗口切换,适用于在从本页面点击跳转到其他页面之后修改了本页面展示的数据，因此需要返回本页面刷新数据</h3>
+        <div >这是第<span id="count" ></span>访问本页面</div>
+
+
+    <script type="text/javascript" >
+
+        var count = 1;
+        $("#count").text(count);
+        document.addEventListener('visibilitychange',function () {
+            /*count++;
+            $("#count").text(count);*/
+            if (!document.hidden){   //本页面可见时
+                //如果窗口切换到本页面
+                count++;
+                $("#count").text(count);
+            }
+            console.log(document.visibilityState);    //visiable  || hidden   页面显示时 为visiable  隐藏时为 hidden
+        })
+    </script>
+
+</body>
+</html>

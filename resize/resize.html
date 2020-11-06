@@ -15,15 +15,13 @@
         var wW = window.innerWidth;
         var rem = wW*bili;
         $('html').css('font-size',rem+"px");
-        $('html').attr('bili',rem);
+       /* $('html').attr('bili',rem);*/
     }
     $(window).on('resize', function() {
         // 设置Iframe窗口大小
         autoWH();
     }).resize();
     autoWH();
-
-
 
 </script>
 <body>
@@ -44,6 +42,7 @@
         </div>
         <div class="container_body" >
             body
+            <textarea id="text" ></textarea>
         </div>
     </div>
 

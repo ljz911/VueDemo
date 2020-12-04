@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>layuiDemo</title>
+    <link rel="stylesheet" href="../layui/css/modules/layer/default/layer.css">
+
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../layui/lay/modules/layer.js"></script>
+
+</head>
+<body>
+
+    <h2>layui练习Demo</h2>
+    <div style="width: 400px;height: 200px" onclick="showLarge('../images/true.jpg')">
+        <img height="100%" width="100%"  src="../images/true.jpg" alt="">
+    </div>
+    <div style="width: 400px;height: 200px" onclick="showLarge('../images/lidong.jpg')">
+        <img height="100%" width="100%"  src="../images/lidong.jpg" alt="">
+    </div>
+
+</body>
+<script type="text/javascript" >
+    function showLarge(src) {
+        layer.photos({
+            photos: {
+                "title": "", //相册标题
+                "id": 123, //相册id
+                "start": 0, //初始显示的图片序号，默认0
+                "data": [   //相册包含的图片，数组格式
+                    {
+                        "alt": "图片名",
+                        "pid": 666, //图片id
+                        "src": src, //原图地址
+                        "thumb": "" //缩略图地址
+                    },
+                    {
+                        "alt": "图片名",
+                        "pid": 555, //图片id
+                        "src": '../images/lidong.jpg', //原图地址
+                        "thumb": "" //缩略图地址
+                    }
+                ]
+            }
+            ,anim: 0 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+        })
+    }
+</script>
+</html>

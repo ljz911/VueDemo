@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>兼容分辨率布局1</title>
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <style>
+        html,body,.container{
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        .header{
+            height: 2rem;
+            background-color: #8cc5ff;
+            font-size: 0px;
+        }
+        .header .top_item{
+            display: inline-block;
+            height: 2rem;
+            width: 25%;
+            font-size: 18px;
+            background-color: #c2e7b0;
+            border: 1px solid red;
+            box-sizing: border-box;
+        }
+        .header .top_item:nth-child(2n+1){
+            background-color: #e0e0e0;
+        }
+        .container_body{
+            width: 100%;
+            background-color: #c0ccda;
+            height: calc(100% - 2rem);
+            font-size: 0;
+        }
+        .container_body .body-left{
+            display: inline-block;
+            width: 75%;
+            background-color: yellow;
+            height: 100%;
+            font-size: 18px;
+        }
+        .container_body .body-right{
+            display: inline-block;
+            width: 25%;
+            background-color: #9F9F9F;
+            height: 100%;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<script>
+    function autoWH() {
+        var bili = 100/1920;
+        var wH = window.innerHeight;
+        var wW = window.innerWidth;
+        var rem = wW*bili;
+        $('html').css('font-size',rem+"px");
+    }
+    $(window).on('resize', function() {
+        // 设置Iframe窗口大小
+        autoWH();
+    }).resize();
+    autoWH();
+
+</script>
+<body>
+    <div class="container" >
+
+        <div class="header" >
+            <div class="top_item" >item1</div>
+            <div class="top_item" >item2</div>
+            <div class="top_item" >item3</div>
+            <div class="top_item" >item4</div>
+
+        </div>
+
+        <div class="container_body" >
+            <div  class="body-left" >
+                body-left
+            </div>
+            <div  class="body-right" >
+                body-right
+            </div>
+
+
+        </div>
+    </div>
+
+</body>
+</html>
